@@ -13,7 +13,7 @@ class Conta:
         self.__saldo += valor
 
     def saque(self, valor):
-        if self.__saldo >= valor:
+        if self.__pode_sacar(valor):
             self.__saldo -= valor
         else:
             print("Saldo insuficiente, saldo atual: {}".format(self.__saldo))
@@ -24,6 +24,10 @@ class Conta:
             conta.deposita(valor)
         else:
             print("Saldo insuficiente, saldo atual: {}".format(self.__saldo))
+
+    def __pode_sacar(self, valor_a_sacar):
+        valor_disponivel_a_sacar = self.__saldo + self.__limite
+        return valor_a_sacar <= valor_disponivel_a_sacar
 
     @property
     def saldo(self):
@@ -39,4 +43,8 @@ class Conta:
 
     @limite.setter
     def limite(self, valor):
-        self.__limite = valor
+        self.__limite = valor @ staticmethod
+
+    @staticmethod
+    def codigos_bancos():
+        return {'BB': '001', 'Caixa': '104', 'Itau': '341'}
