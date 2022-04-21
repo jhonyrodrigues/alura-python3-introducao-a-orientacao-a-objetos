@@ -1,27 +1,26 @@
-
 class Conta:
 
     def __init__(self, numero, titular, saldo, limite):
-        self.numero = numero
-        self.titular = titular
-        self.saldo = saldo
-        self.limite = limite
+        self.__numero = numero
+        self.__titular = titular
+        self.__saldo = saldo
+        self.__limite = limite
 
     def extrato(self):
-        print("Saldo de R$ {}, do titular: {}".format(self.saldo, self.titular))
+        print("Saldo de R$ {}, do titular: {}".format(self.__saldo, self.__titular))
 
-    def deposita(self, valor):
-        self.saldo += valor
+    def deposito(self, valor):
+        self.__saldo += valor
 
     def saque(self, valor):
-        if self.saldo > valor:
-            self.saldo -= valor
+        if self.__saldo >= valor:
+            self.__saldo -= valor
         else:
-            print("Saldo insuficiente, saldo atual: {}".format(self.saldo))
+            print("Saldo insuficiente, saldo atual: {}".format(self.__saldo))
 
     def transferencia(self, conta, valor):
-        if self.saldo > valor:
-            self.saldo -= valor
-            conta.saldo += valor
+        if self.__saldo >= valor:
+            self.saque(valor)
+            conta.deposita(valor)
         else:
-            print("Saldo insuficiente, saldo atual: {}".format(self.saldo))
+            print("Saldo insuficiente, saldo atual: {}".format(self.__saldo))
